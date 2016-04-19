@@ -1,0 +1,31 @@
+{
+  "name": "pong",
+  "version": "1.0.0",
+  "description": "interactive two-player game",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paeespinoza/Pong-Final.git"
+  },
+  "author": "Phillip A. Espinoza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paeespinoza/Pong-Final/issues"
+  },
+  "homepage": "https://github.com/paeespinoza/Pong-Final#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.4",
+    "mongodb": "^2.1.16",
+    "mongoose": "^4.4.12",
+    "morgan": "^1.7.0",
+    "path": "^0.12.7",
+    "socket.io": "^1.4.5"
+  },
+  "devDependencies": {}
+}
