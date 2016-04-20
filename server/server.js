@@ -9,7 +9,7 @@ var express = require('express'),
     apiRoutes = require('./api_routes.js'),
     config = require('../config.json'),
     path = require('path'),
-    mongodb_url = 'mogodb://localhost:27017/pong'
+    mongodb_url = 'mongodb://localhost:27017/pong'
 
     mongoose.connect(mongodb_url, function(err){
       if (err) console.log(err)
@@ -17,7 +17,7 @@ var express = require('express'),
     })
 
 app.use(logger('dev'))
-app.use(express.static(__dirname +'/public'))
+app.use(express.static(__dirname +'../client'))
 
 app.set("port", process.env.PORT || 3000)
 app.use(logger('dev'))
