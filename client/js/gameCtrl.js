@@ -241,6 +241,7 @@ function ballMovement(){
 
   var modifier = 0.05
   var isGameStarted = true
+  // console.log('start', new Date().getTime())
 
   if(isGameStarted) {
     ballStuff.x += -ballStuff.speedX * modifier;
@@ -251,6 +252,7 @@ function ballMovement(){
   // BALL BOUNCE---------------------------
   // console.log('canvas', canvas.width, 'ballStuff', ballStuff.width)
   if(ballStuff.x <= 0) {
+    console.log('end', new Date().getTime())
     paddle2Stuff.score++;
 
     return startReset()
@@ -258,6 +260,7 @@ function ballMovement(){
   }
 
   if(ballStuff.x > canvas.width - ballStuff.width) {
+    console.log('end', new Date().getTime())
     paddle1Stuff.score++;
     return startReset()
     // console.log('hello2')
@@ -330,11 +333,12 @@ function randomize() {
   function startReset(){
 
     setTimeout(function(){
+      console.log('start', new Date().getTime())
       reset()
     },5000);
   }
   function reset(){
-    console.log('hey')
+  
 
   // isGameStarted = true;
   ballStuff.x = (canvas.width - ballStuff.width) / 2;
