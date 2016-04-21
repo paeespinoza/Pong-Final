@@ -252,7 +252,11 @@ function ballMovement(){
   // BALL BOUNCE---------------------------
   // console.log('canvas', canvas.width, 'ballStuff', ballStuff.width)
   if(ballStuff.x <= 0) {
-    console.log('end', new Date().getTime())
+    gameCtrl.gameEnd = new Date().getTime()
+    gameCtrl.score = gameCtrl.calculateScore(gameCtrl.gameStart, gameCtrl.gameEnd)
+    // console.log('start', gameCtrl.gameStart)
+    console.log('gameCtrl.score', gameCtrl.score)
+    // console.log('end', gameCtrl.gameEnd)
     paddle2Stuff.score++;
 
     return startReset()
@@ -260,7 +264,11 @@ function ballMovement(){
   }
 
   if(ballStuff.x > canvas.width - ballStuff.width) {
-    console.log('end', new Date().getTime())
+    gameCtrl.gameEnd = new Date().getTime()
+      gameCtrl.score = gameCtrl.calculateScore(gameCtrl.gameStart, gameCtrl.gameEnd)
+      // console.log('start', gameCtrl.gameStart)
+      console.log('gameCtrl.score', gameCtrl.score)
+      // console.log('end', gameCtrl.gameEnd)
     paddle1Stuff.score++;
     return startReset()
     // console.log('hello2')
@@ -314,7 +322,8 @@ if(((ballStuff.y + ballStuff.height) > canvas.height)){
 
 requestAnimationFrame(ballMovement)
 }
-console.log('start', new Date().getTime())
+gameCtrl.gameStart = new Date().getTime()
+console.log('start', gameCtrl.gameStart)
 ballMovement()
 // console.log('cavas.height', canvas.height, canvas.width)
 
@@ -325,6 +334,12 @@ function randomize() {
   // positive or negative?
   return Math.random() > 0.5 ? _rand : _rand * -1;
 }
+// -------------------------------------------------------
+// Calculate Score---------------------------------------------------
+gameCtrl.calculateScore = function(start, end){
+  return end - start
+
+}
 
 
 // -------------------------------------------------------
@@ -333,12 +348,13 @@ function randomize() {
   function startReset(){
 
     setTimeout(function(){
-      console.log('start', new Date().getTime())
+      gameCtrl.gameStart = new Date().getTime()
+      console.log('start', gameCtrl.gameStart)
       reset()
     },5000);
   }
   function reset(){
-  
+
 
   // isGameStarted = true;
   ballStuff.x = (canvas.width - ballStuff.width) / 2;
