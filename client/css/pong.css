@@ -4,7 +4,7 @@
     display: block;
     width: 800px;
     height: 400px;
-    position: absolute;
+    /*position: absolute;*/
     top: 0;
     bottom: 0;
     left: 0;
@@ -14,11 +14,27 @@
 .title {
   color:#24A5BA;
   text-align: center;
-  font-size: 80px;
+  /*margin: -;*/
+  font-size: 65px;
   font-family: "title";
 }
 
 @font-face{
 font-family: "title";
  src: url("PROMETHEUS.ttf");
+}
+
+/*.leaderBoard {
+  color:red;
+  float: right;
+}*/
+
+.leader {
+  font-family: "title";
+  font-size: 40px;
+  color: #02C803;
+  text-transform: uppercase;
+}
+body{
+  background-image:  url("sky.jpg");
 }

@@ -2,6 +2,9 @@ var
 db = require('./models.js'),
 config = require('../config.json')
 
-model.exports ={
-  
+module.exports ={
+  homeRoute:function(req,res){
+    res.sendFile('../client/index.html')
+  }
+
 }

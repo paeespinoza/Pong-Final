@@ -46,10 +46,13 @@ if (pongCourt.getContext) {
    speedY:randomize()
   }
 
+  gameCtrl.requestAnimationFrame = window.requestAnimationFrame
+  console.log(gameCtrl.requestAnimationFrame)
 
 
   // PONG COURT\\
-  var render = function(){
+  // var render = function(){
+  gameCtrl.render = function(){
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.fillStyle='purple';
     context.fillRect(0, 0, 1000, 1000);
@@ -58,8 +61,7 @@ if (pongCourt.getContext) {
     context.fillText(paddle1Stuff.score, 25,50);
     context.fillText(paddle2Stuff.score , 700,50);
 
-    gameCtrl.requestAnimationFrame = window.requestAnimationFrame
-    gameCtrl.requestAnimationFrame(render);
+    gameCtrl.requestAnimationFrame.call(window, gameCtrl.render);
 
 
     // CENTER DIVIDER\\
@@ -82,19 +84,19 @@ if (pongCourt.getContext) {
     ball.fill();
 
   };
-render();
+this.render();
 };
-// // ANIMATION for PADDLE1 \\
-// // var requestAnimationFrame =
-//   gameCtrl.requestAnimationFrame =
-//         window.requestAnimationFrame ||
-//         window.webkitRequestAnimationFrame ||
-//         window.mozRequestAnimationFrame ||
-//         window.msRequestAnimationFrame ||
-//         window.oRequestAnimationFrame ||
-//         function(callback) {
-//           return setTimeout(callback, 1);
-//         };
+// ANIMATION for PADDLE1 \\
+var requestAnimationFrame =
+  gameCtrl.requestAnimationFrame =
+        window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
+        function(callback) {
+          return setTimeout(callback, 1);
+        };
 var animate = function (prop, val, duration) {
 
   var start = new Date().getTime();
@@ -236,6 +238,7 @@ var meta2 = function(e) {
 // PONG BALL ANIMATION---------------------------------------
 
 function ballMovement(){
+
   var modifier = 0.05
   var isGameStarted = true
 
@@ -308,6 +311,7 @@ if(((ballStuff.y + ballStuff.height) > canvas.height)){
 
 requestAnimationFrame(ballMovement)
 }
+console.log('start', new Date().getTime())
 ballMovement()
 // console.log('cavas.height', canvas.height, canvas.width)
 

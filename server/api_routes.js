@@ -1,6 +1,6 @@
 var
-apiRouter = require ('express').Router()
-apiRouter.route('/').get(function(req,res){
-  res.sendFile('../client/index.html')
-})
+apiRouter = require ('express').Router(),
+controllers = require('./controllers.js')
+apiRouter.route('/').get(controllers.homeRoute)
+
 module.exports = apiRouter
