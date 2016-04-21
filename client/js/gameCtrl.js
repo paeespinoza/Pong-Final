@@ -3,7 +3,7 @@ angular.module('pong')
   function gameCtrl(){
     var gameCtrl = this
 
-
+// THIS IS A TEST
 
 // PONG COURT
 var pongCourt = document.getElementById ('canvas');
