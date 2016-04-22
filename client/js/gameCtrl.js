@@ -1,6 +1,7 @@
 angular.module('pong')
   .controller('gameCtrl', gameCtrl)
-  function gameCtrl($scope){
+  function gameCtrl($scope, $http){
+
     var gameCtrl = this
 
 
@@ -355,15 +356,41 @@ gameCtrl.calculateScore = function(start, end){
 // GAME RESET---------------------------------------------------
 
   function startReset(){
+    gameCtrl.submitScore=function(){
+      console.log('function fired')
+      var scoreObject = {playerInitials: gameCtrl.initials, playerScore:gameCtrl.score}
+      $http.post('/api/scores', scoreObject).then(function(response){
+        console.log(response)
+        gameCtrl.initials = ""
+        setTimeout(function(){
+          gameCtrl.gameStart = new Date().getTime()
+          gameCtrl.gameEnded = false
+          // console.log(gameCtrl.gameEnded)
+          // console.log('start', gameCtrl.gameStart)
+          $scope.$apply()
+          reset()
+        });
+      }, function(error){
+        console.log(error)
+      });
 
-    setTimeout(function(){
-      gameCtrl.gameStart = new Date().getTime()
-      gameCtrl.gameEnded = false
-      console.log(gameCtrl.gameEnded)
-      console.log('start', gameCtrl.gameStart)
-      $scope.$apply()
-      reset()
-    },5000);
+    }
+    // var scoreObject = {score: gameCtrl.score}
+    // $http.post('/api/scores', scoreObject).then(function(response){
+    //   console.log(response)
+    // }, function(error){
+    //   console.log(error)
+    // });
+
+
+    // setTimeout(function(){
+    //   gameCtrl.gameStart = new Date().getTime()
+    //   gameCtrl.gameEnded = false
+    //   // console.log(gameCtrl.gameEnded)
+    //   // console.log('start', gameCtrl.gameStart)
+    //   $scope.$apply()
+    //   reset()
+    // },5000);
   }
   // setInterval(function(){
   //   $scope.$apply()
