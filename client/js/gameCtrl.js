@@ -1,9 +1,8 @@
 angular.module('pong')
   .controller('gameCtrl', gameCtrl)
-  function gameCtrl(){
+  function gameCtrl($scope){
     var gameCtrl = this
 
-// THIS IS A TEST
 
 // PONG COURT
 var pongCourt = document.getElementById ('canvas');
@@ -58,8 +57,8 @@ if (pongCourt.getContext) {
     context.fillRect(0, 0, 1000, 1000);
     context.font = "30px Terminator Real NFI";
     context.fillStyle = '#CAEDF9'
-    context.fillText(paddle1Stuff.score, 25,50);
-    context.fillText(paddle2Stuff.score , 700,50);
+    // context.fillText(paddle1Stuff.score, 25,50);
+    // context.fillText(paddle2Stuff.score , 700,50);
 
     gameCtrl.requestAnimationFrame.call(window, gameCtrl.render);
 
@@ -254,11 +253,14 @@ function ballMovement(){
   if(ballStuff.x <= 0) {
     gameCtrl.gameEnd = new Date().getTime()
     gameCtrl.score = gameCtrl.calculateScore(gameCtrl.gameStart, gameCtrl.gameEnd)
+    gameCtrl.gameEnded = true
+    console.log(gameCtrl.gameEnded)
     // console.log('start', gameCtrl.gameStart)
-    console.log('gameCtrl.score', gameCtrl.score)
+    // console.log('gameCtrl.score', gameCtrl.score)
     // console.log('end', gameCtrl.gameEnd)
     paddle2Stuff.score++;
 
+    $scope.$apply()
     return startReset()
     // console.log('hello1')
   }
@@ -266,10 +268,13 @@ function ballMovement(){
   if(ballStuff.x > canvas.width - ballStuff.width) {
     gameCtrl.gameEnd = new Date().getTime()
       gameCtrl.score = gameCtrl.calculateScore(gameCtrl.gameStart, gameCtrl.gameEnd)
+      gameCtrl.gameEnded = true
+      console.log(gameCtrl.gameEnded)
       // console.log('start', gameCtrl.gameStart)
-      console.log('gameCtrl.score', gameCtrl.score)
+      // console.log('gameCtrl.score', gameCtrl.score)
       // console.log('end', gameCtrl.gameEnd)
     paddle1Stuff.score++;
+    $scope.$apply()
     return startReset()
     // console.log('hello2')
   }
@@ -321,9 +326,12 @@ if(((ballStuff.y + ballStuff.height) > canvas.height)){
 
 
 requestAnimationFrame(ballMovement)
-}
+}``
 gameCtrl.gameStart = new Date().getTime()
+gameCtrl.gameEnded = false
+console.log(gameCtrl.gameEnded)
 console.log('start', gameCtrl.gameStart)
+
 ballMovement()
 // console.log('cavas.height', canvas.height, canvas.width)
 
@@ -349,11 +357,20 @@ gameCtrl.calculateScore = function(start, end){
 
     setTimeout(function(){
       gameCtrl.gameStart = new Date().getTime()
+      gameCtrl.gameEnded = false
+      console.log(gameCtrl.gameEnded)
       console.log('start', gameCtrl.gameStart)
+      $scope.$apply()
       reset()
     },5000);
   }
+  // setInterval(function(){
+  //   $scope.$apply()
+  //   console.log('apply')
+  //
+  // },1000)
   function reset(){
+
 
 
   // isGameStarted = true;
