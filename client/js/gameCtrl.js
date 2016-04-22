@@ -345,7 +345,8 @@ function randomize() {
 // -------------------------------------------------------
 // Calculate Score---------------------------------------------------
 gameCtrl.calculateScore = function(start, end){
-  return end - start
+  console.log(end, start)
+  return gameCtrl.gameEnd - gameCtrl.gameStart
 
 }
 
