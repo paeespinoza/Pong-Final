@@ -13,9 +13,7 @@ angular.module("pong").config(function($stateProvider, $urlRouterProvider) {
     .state('leaderBoard', {
       url: "/leaderBoard",
       templateUrl: "partials/leaderBoard.html",
-      controller: function($scope) {
-        $scope.items = [];
-      }
+      controller: "leaderCtrl as leader"
     })
 
 });

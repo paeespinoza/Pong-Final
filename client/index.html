@@ -16,9 +16,12 @@
         <div ui-view></div>
         <a ui-sref="game">game</a>
         <a ui-sref="leaderBoard">leaderBoard</a>
+        <p> {{game.getScores}}</p>
   <script src="app.js"></script>
   <script src="app.routes.js"></script>
+  <script src="js/scoresFactory.js"></script>
   <script src="js/gameCtrl.js"></script>
+  <script src="js/leaderCtrl.js"></script>
   </body>
 
 </html>

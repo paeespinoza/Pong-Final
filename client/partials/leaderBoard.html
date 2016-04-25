@@ -1,6 +1,4 @@
 <h1>leader Board </h1>
-<ul>
-  <li class="leader"> Leader 1 </li>
-  <li class="leader"> Leader 2 </li>
-  <li class="leader"> Leader 3 </li>
+<ul ng-init="leader.getLeaders()">
+  <li ng-repeat="leader in leader.leaders " class="leader">{{leader.playerInitials}}&nbsp;&#58;&nbsp;{{leader.playerScore}} </li>
 </ul>

@@ -21,7 +21,35 @@ module.exports ={
       success: true
     })
     })
-    
+
+  },
+  allScores:function(req,res){
+    db.Game.find({}, function(err, scores){
+      if(err){
+        console.log(err)
+      }
+      console.log("scores", scores)
+      res.json({scores:scores})
+    })
+  },
+  topTenScores:function(req,res){
+    db.Game.find({}, function(err, scores){
+      if(err){
+        console.log(err)
+      }
+      console.log("scores", scores)
+      //
+      function sortNumber(a,b){
+        return b['playerScore'] - a['playerScore'];
+      }
+
+      var leaders = scores.sort(sortNumber);
+      leaders = leaders.slice(0,10)
+      console.log("these are the leaders", leaders )
+      res.json({leaders:leaders})
+
+    })
   }
+
 
 }

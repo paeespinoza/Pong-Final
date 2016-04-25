@@ -1,6 +1,6 @@
 angular.module('pong')
   .controller('gameCtrl', gameCtrl)
-  function gameCtrl($scope, $http){
+  function gameCtrl($scope, $http, scoresFactory){
 
     var gameCtrl = this
 
@@ -409,4 +409,6 @@ gameCtrl.calculateScore = function(start, end){
   ballMovement()
 
 }
+
+// console.log(scoresFactory.all)
 }
