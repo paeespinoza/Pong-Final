@@ -3,7 +3,12 @@ angular.module('pong')
   function gameCtrl($scope, $http, scoresFactory){
 
     var gameCtrl = this
-
+      gameCtrl.go = function(){
+      gameCtrl.gameStopped = false
+    }
+    gameCtrl.stop = function(){
+      gameCtrl.gameStopped = true
+    }
 
 // PONG COURT
 var pongCourt = document.getElementById ('canvas');
@@ -255,6 +260,7 @@ function ballMovement(){
     gameCtrl.gameEnd = new Date().getTime()
     gameCtrl.score = gameCtrl.calculateScore(gameCtrl.gameStart, gameCtrl.gameEnd)
     gameCtrl.gameEnded = true
+    gameCtrl.stop()
     console.log(gameCtrl.gameEnded)
     // console.log('start', gameCtrl.gameStart)
     // console.log('gameCtrl.score', gameCtrl.score)
@@ -262,7 +268,8 @@ function ballMovement(){
     paddle2Stuff.score++;
 
     $scope.$apply()
-    return startReset()
+
+    return gameCtrl.startReset()
     // console.log('hello1')
   }
 
@@ -270,13 +277,16 @@ function ballMovement(){
     gameCtrl.gameEnd = new Date().getTime()
       gameCtrl.score = gameCtrl.calculateScore(gameCtrl.gameStart, gameCtrl.gameEnd)
       gameCtrl.gameEnded = true
+      gameCtrl.stop()
       console.log(gameCtrl.gameEnded)
       // console.log('start', gameCtrl.gameStart)
       // console.log('gameCtrl.score', gameCtrl.score)
       // console.log('end', gameCtrl.gameEnd)
     paddle1Stuff.score++;
     $scope.$apply()
-    return startReset()
+
+
+    return gameCtrl.startReset()
     // console.log('hello2')
   }
 
@@ -327,7 +337,7 @@ if(((ballStuff.y + ballStuff.height) > canvas.height)){
 
 
 requestAnimationFrame(ballMovement)
-}``
+}
 gameCtrl.gameStart = new Date().getTime()
 gameCtrl.gameEnded = false
 console.log(gameCtrl.gameEnded)
@@ -354,27 +364,32 @@ gameCtrl.calculateScore = function(start, end){
 
 // -------------------------------------------------------
 // GAME RESET---------------------------------------------------
+gameCtrl.submitScore=function(){
 
-  function startReset(){
-    gameCtrl.submitScore=function(){
-      console.log('function fired')
-      var scoreObject = {playerInitials: gameCtrl.initials, playerScore:gameCtrl.score}
-      $http.post('/api/scores', scoreObject).then(function(response){
-        console.log(response)
-        gameCtrl.initials = ""
-        setTimeout(function(){
-          gameCtrl.gameStart = new Date().getTime()
-          gameCtrl.gameEnded = false
-          // console.log(gameCtrl.gameEnded)
-          // console.log('start', gameCtrl.gameStart)
-          $scope.$apply()
-          reset()
-        });
-      }, function(error){
-        console.log(error)
-      });
+  var scoreObject = {playerInitials: gameCtrl.initials, playerScore:gameCtrl.score}
+  $http.post('/api/scores', scoreObject).then(function(response){
+    gameCtrl.initials = ""
+    console.log(gameCtrl.gameStopped)
+    gameCtrl.go()
+    console.log(gameCtrl.gameStopped)
 
-    }
+}, function(error){
+  console.log(error)
+});
+
+}
+
+
+
+   gameCtrl.startReset = function(){
+    setTimeout(function(){
+      gameCtrl.gameStart = new Date().getTime()
+      gameCtrl.go()
+      $scope.$apply()
+      if (gameCtrl.gameStopped){reset()}
+    });
+
+
     // var scoreObject = {score: gameCtrl.score}
     // $http.post('/api/scores', scoreObject).then(function(response){
     //   console.log(response)
