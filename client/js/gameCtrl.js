@@ -262,6 +262,7 @@ function ballMovement(){
   if(ballStuff.x <= 0) {
     gameCtrl.gameEnd = new Date().getTime()
     gameCtrl.score = gameCtrl.calculateScore(gameCtrl.gameStart, gameCtrl.gameEnd)
+    console.log(gameCtrl.score)
     gameCtrl.gameEnded = true
     gameCtrl.stop()
     console.log(gameCtrl.gameEnded)
@@ -279,6 +280,7 @@ function ballMovement(){
   if(ballStuff.x > canvas.width - ballStuff.width) {
     gameCtrl.gameEnd = new Date().getTime()
       gameCtrl.score = gameCtrl.calculateScore(gameCtrl.gameStart, gameCtrl.gameEnd)
+      console.log(gameCtrl.score)
       gameCtrl.gameEnded = true
       gameCtrl.stop()
       console.log(gameCtrl.gameEnded)
@@ -360,8 +362,8 @@ function randomize() {
 // Calculate Score---------------------------------------------------
 gameCtrl.calculateScore = function(start, end){
   console.log(end, start)
-  return gameCtrl.gameEnd - gameCtrl.gameStart
-
+  // return gameCtrl.gameEnd - gameCtrl.gameStart
+  return end - start
 }
 
 
