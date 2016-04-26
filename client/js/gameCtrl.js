@@ -4,9 +4,12 @@ angular.module('pong')
 
     var gameCtrl = this
       gameCtrl.go = function(){
+        console.log("go fired")
       gameCtrl.gameStopped = false
+
     }
     gameCtrl.stop = function(){
+      console.log("stop fired")
       gameCtrl.gameStopped = true
     }
 
@@ -52,7 +55,7 @@ if (pongCourt.getContext) {
   }
 
   gameCtrl.requestAnimationFrame = window.requestAnimationFrame
-  console.log(gameCtrl.requestAnimationFrame)
+  // console.log(gameCtrl.requestAnimationFrame)
 
 
   // PONG COURT\\
@@ -343,7 +346,7 @@ gameCtrl.gameEnded = false
 console.log(gameCtrl.gameEnded)
 console.log('start', gameCtrl.gameStart)
 
-ballMovement()
+// ballMovement()
 // console.log('cavas.height', canvas.height, canvas.width)
 
 
@@ -371,6 +374,8 @@ gameCtrl.submitScore=function(){
     gameCtrl.initials = ""
     console.log(gameCtrl.gameStopped)
     gameCtrl.go()
+    gameCtrl.gameEnded = false
+    // gameCtrl.startReset()
     console.log(gameCtrl.gameStopped)
 
 }, function(error){
@@ -384,9 +389,11 @@ gameCtrl.submitScore=function(){
    gameCtrl.startReset = function(){
     setTimeout(function(){
       gameCtrl.gameStart = new Date().getTime()
-      gameCtrl.go()
+      console.log(gameCtrl.gameStopped)
       $scope.$apply()
-      if (gameCtrl.gameStopped){reset()}
+      console.log("starting", gameCtrl.game)
+      if (!gameCtrl.gameStopped){reset()}
+      // reset()
     });
 
 
