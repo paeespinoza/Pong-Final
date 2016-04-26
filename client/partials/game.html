@@ -2,6 +2,7 @@
 <!-- <hr/> -->
 <h1 class="title"> GALAXY PONG </h1>
 <canvas class= "canvas" id="canvas" width="756" height="404" style="border:10px solid #24A5BA"></canvas>
+<button ng-click="">START</button>
 <div ng-show="game.gameEnded" class="scoreModal" id = "scoreModal">Your Score Is {{game.score}}
 <form ng-submit="game.submitScore()">
  <input ng-model="game.initials" type="text" id="initials" placeholder="aaa" >
