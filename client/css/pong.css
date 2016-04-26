@@ -32,7 +32,7 @@ font-family: "title";
 .leader {
   font-family: "title";
   font-size: 40px;
-  color: #02C803;
+  color: red;
   text-transform: uppercase;
 }
 body{
@@ -54,5 +54,5 @@ body{
 }
 
   .white{
-    color: #fff;  
+    color: #fff;
   }
